@@ -10,6 +10,6 @@ public class College {
         student.setFullName("Иванов Петр Иванович");
         student.setDateEntry(new Date());
         student.setGroup("13ВЭ2");
-        System.out.println("Студент" + student.getFullName() + " группы " +student.getGroup() +" поступил " + student.getDateEntry());
+        System.out.println("Студент" + student.getFullName() + " группы " + student.getGroup() + " поступил " + student.getDateEntry());
     }
 }
