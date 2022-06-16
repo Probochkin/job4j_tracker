@@ -6,8 +6,15 @@ public class ExitAction implements UserAction {
         return "Exit Program";
     }
 
+    private final Output out;
+
+    public ExitAction(Output out) {
+        this.out = out;
+    }
+
     @Override
     public boolean execute(Input input, Tracker tracker) {
+        out.println("=== Exit Program ===");
         return false;
     }
 }
