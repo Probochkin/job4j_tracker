@@ -1,70 +1,98 @@
 package ru.job4j.tracker;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Tracker {
-    private final Item[] items = new Item[100];
+    private final List<Item> items = new ArrayList<>();
     private int ids = 1;
     private int size = 0;
 
     public Item add(Item item) {
         item.setId(ids++);
-        items[size++] = item;
+        items.add(item);
         return item;
     }
 
-    public Item[] findAll() {
-       return Arrays.copyOf(items, size);
+    public List<Item> findAll() {
+        return items;
     }
 
     public Item findById(int id) {
-        int index = indexOf(id);
-        return index != -1 ? items[index] : null;
+        Item item = indexFound(id);
+        return item != null ? item : null;
     }
 
-    public Item[] findByName(String key) {
-        Item[] rsl = new Item[100];
-        int size = 0;
-        for (int index = 0; index < this.size; index++) {
-            if (items[index].getName().equals(key)) {
-
-                rsl[size] = items[index];
-                size++;
+    public List<Item> findByName(String key) {
+//        Item[] rsl = new Item[100];
+//        int size = 0;
+//        for (int index = 0; index < this.size; index++) {
+//            if (items[index].getName().equals(key)) {
+//
+//                rsl[size] = items[index];
+//                size++;
+//            }
+//        }
+//        return Arrays.copyOf(rsl, size);
+        List<Item> rsl = new ArrayList<>();
+        for (Item item : items) {
+            if (item.getName().equals(key)) {
+                rsl.add(item);
             }
         }
-        return Arrays.copyOf(rsl, size);
+        return rsl;
     }
 
-    private int indexOf(int id) {
-        int rsl = -1;
-        for (int index = 0; index < size; index++) {
-            if (items[index].getId() == id) {
-                rsl = index;
-                break;
+    private Item indexFound(int id) {
+        Item rsl = null;
+//        for (int index = 0; index < size; index++) {
+//            if (items[index].getId() == id) {
+//                rsl = index;
+//                break;
+//            }
+//        }
+        for (Item item : items) {
+            if (item.getId() == id) {
+                rsl = item;
             }
         }
         return rsl;
     }
 
     public boolean replace(int id, Item item) {
-        int index = indexOf(id);
-        boolean result = index != -1;
+//        int index = indexOf(id);
+//        boolean result = index != -1;
+//        if (result) {
+//            item.setId(id);
+//            items[index] = item;
+//        }
+//        return result;
+        Item found = indexFound(id);
+        boolean result = found != null;
         if (result) {
-            item.setId(id);
-            items[index] = item;
+
+            found.setName(item.getName());
+
         }
         return result;
     }
 
     public boolean delete(int id) {
-        int index = indexOf(id);
-        boolean rsl = index != -1;
+//        int index = indexOf(id);
+//        boolean rsl = index != -1;
+//        if (rsl) {
+//            System.arraycopy(items, index + 1, items, index, size - index - 1);
+//            items[size - 1] = null;
+//            size--;
+//        }
+//        return rsl;
+        Item found = indexFound(id);
+        boolean rsl = found != null;
         if (rsl) {
-            System.arraycopy(items, index + 1, items, index, size - index - 1);
-            items[size - 1] = null;
-            size--;
+
+            items.remove(found);
+
         }
-        return rsl;
+       return rsl;
     }
 }
