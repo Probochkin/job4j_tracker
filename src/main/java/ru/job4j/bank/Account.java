@@ -2,7 +2,15 @@ package ru.job4j.bank;
 
 import java.util.Objects;
 
+/**
+ * Класс описывает объект аккаунт
+ * @author Semion
+ * @version 1.0
+ */
 public class Account {
+    /**
+     * Поля для хранение реквизитов и баланса аккаунта
+     */
     private String requisite;
     private double balance;
 

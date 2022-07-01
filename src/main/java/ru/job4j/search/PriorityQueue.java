@@ -3,6 +3,9 @@ package ru.job4j.search;
 import java.util.LinkedList;
 
 public class PriorityQueue {
+    /**
+     * Хранение задания осуществляется в коллекции типа LinkedList
+     */
     private LinkedList<Task> tasks = new LinkedList<>();
 
     /**
@@ -23,6 +26,10 @@ public class PriorityQueue {
         this.tasks.add(index, task);
     }
 
+    /**
+     * Метод позволяет получить первую задачу в очереди
+     * @return возвращает задачу из головы очереди или null если очередь пуста
+     */
     public Task take() {
         return tasks.poll();
     }

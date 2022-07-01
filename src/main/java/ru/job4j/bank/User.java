@@ -2,7 +2,17 @@ package ru.job4j.bank;
 
 import java.util.Objects;
 
+/**
+ * Класс реализует модель объекта пользователя
+ * @author Semion
+ * @version 1.0
+ */
 public class User {
+    /**
+     * Поля данных пользователя
+     * паспорт
+     * имя
+     */
     private String passport;
     private String username;
 
