@@ -1,5 +1,4 @@
 package ru.job4j.tracker;
-import java.time.format.DateTimeFormatter;
 
 public class StartUI {
     private final Output out;
@@ -8,7 +7,7 @@ public class StartUI {
         this.out = out;
     }
 
-    public void init(Input input, Tracker tracker, UserAction[] actions) {
+    public void init(Input input, Store store, UserAction[] actions) {
         boolean run = true;
         while (run) {
             this.showMenu(actions);
@@ -18,7 +17,7 @@ public class StartUI {
                 continue;
             }
             UserAction action = actions[select];
-            run = action.execute(input, tracker);
+            run = action.execute(input, store);
         }
     }
 
@@ -32,7 +31,8 @@ public class StartUI {
     public static void main(String[] args) {
         Output output = new ConsoleOutput();
         Input input = new ValidateInput(output, new ConsoleInput());
-        Tracker tracker = new Tracker();
+        SqlTracker tracker = new SqlTracker();
+        tracker.init();
         UserAction[] actions = {
                 new CreateAction(output), new ShowAll(output), new EditItem(output), new DeleteItem(output), new FindItemById(output), new FindItemsByName(output), new ExitAction(output)
         };
